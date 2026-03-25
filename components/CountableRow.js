@@ -2,7 +2,7 @@ import { Text, View, StyleSheet } from "react-native";
 import { CountButton } from "./CountButton";
 import { CommonStyles } from "../styles/CommonStyles";
 
-export const CountableRow = ({ countable, changeCount, index }) => (
+export const CountableRow = ({ countable, changeCount, index, deleteRow }) => (
   <View style={CommonStyles.row}>
     <View style={styles.nameColumn}>
       <Text style={CommonStyles.textItem}>{countable.name}</Text>
@@ -19,6 +19,12 @@ export const CountableRow = ({ countable, changeCount, index }) => (
         text={"-"}
         submit={() => {
           changeCount(-1, index);
+        }}
+      />
+      <CountButton
+        text={"Delete"}
+        submit={() => {
+          deleteRow(index);
         }}
       />
     </View>

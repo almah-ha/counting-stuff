@@ -21,8 +21,21 @@ export default function App() {
   };
 
   const addNewCountable = (name) => {
+    const trimmedName = name.trim();
+    if (!trimmedName) {
+      alert("Enter a name");
+      return;
+    }
+    if (countables.some((c) => c.name.toLowerCase() === name.toLowerCase())) {
+      alert("This is already in the list!");
+      return;
+    }
     const newState = [...countables, { name, count: 0 }];
     setCountables(newState);
+  };
+
+  const deleteRow = (index) => {
+    setCountables((prev) => prev.filter((_, i) => i !== index));
   };
 
   const isLoaded = useRef(false);
@@ -52,6 +65,7 @@ export default function App() {
               key={countable.name}
               changeCount={changeCount}
               index={index}
+              deleteRow={deleteRow}
             />
           ))}
         </ScrollView>
